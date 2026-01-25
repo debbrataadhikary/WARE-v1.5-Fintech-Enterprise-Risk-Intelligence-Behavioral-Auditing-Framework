@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: "Raw ingestion layer (Bronze) from fintech app"
+    database: FinTech_Analysis
+    schema: public
+    tables:
+      - name: bronze_transactions
+        description: "Raw transaction logs ingested via Python"
+        columns:
+          - name: transaction_id
+            tests:
+              - unique
+              - not_null
+
+      - name: bronze_customers
+        description: "Customer master data containing home country information"
+        columns:
+          - name: user_uuid
+            tests:
+              - unique
+              - not_null

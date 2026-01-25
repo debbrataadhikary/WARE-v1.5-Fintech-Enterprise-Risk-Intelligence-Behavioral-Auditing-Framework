@@ -1,0 +1,58 @@
+name: WARE_CI_Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: FinTech_Analysis  # এখানে নাম ঠিক রাখা হয়েছে
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          pip install dbt-postgres
+          dbt deps
+
+      - name: Verify dbt Connection
+        run: dbt debug --profiles-dir .
+        env:
+          DBT_ENV_SECRET_USER: user
+          DBT_ENV_SECRET_PASS: password
+
+      - name: Run Models
+        run: dbt run --profiles-dir .
+        env:
+          DBT_ENV_SECRET_USER: user
+          DBT_ENV_SECRET_PASS: password
+
+      - name: Execute 23 Data Quality Tests
+        run: dbt test --profiles-dir .
+        env:
+          DBT_ENV_SECRET_USER: user
+          DBT_ENV_SECRET_PASS: password
