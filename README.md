@@ -12,8 +12,7 @@ Weighted Anomaly & Risk Engine (WARE) v1.5: Fintech Enterprise Risk Intelligence
 * **Contextual Priority:** T+1 windowing allows for deep 90-day behavioral baselines and seasonal adjustments.
 * **Engineering Restraint:** Explicitly scoped to post-transaction enforcement; it is a governance layer, not a payment gateway.
 
-(assets/<img width="1850" height="877" alt="dbt_project_lineage" src="https://github.com/user-attachments/assets/7b1eafd4-9c4b-456e-80bd-733ae3cffb0f" />
-)
+![Project Lineage Graph](assets/dbt_project_lineage.png)
 > *Figure 1: End-to-end Medallion Architecture Lineage (Bronze to Gold).*
 
 ## 2. Technical Assumptions & System Boundaries
