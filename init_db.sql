@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 
 CREATE SCHEMA IF NOT EXISTS raw_data;
 
@@ -14,7 +16,7 @@ CREATE TABLE IF NOT EXISTS raw_data.bronze_customers (
     initial_deposit_eur NUMERIC(18,2)
 );
 
--
+
 CREATE TABLE IF NOT EXISTS raw_data.bronze_transactions (
     ingestion_id INTEGER,
     transaction_id UUID PRIMARY KEY,
@@ -33,9 +35,5 @@ CREATE TABLE IF NOT EXISTS raw_data.bronze_transactions (
 
 
 INSERT INTO raw_data.bronze_customers (user_uuid, full_name, email) 
-VALUES ('550e8400-e29b-41d4-a716-446655440000', 'CI Test User', 'test@example.com') 
-ON CONFLICT DO NOTHING;
-
-INSERT INTO raw_data.bronze_transactions (transaction_id, user_uuid, amount_eur) 
-VALUES ('660f9511-f31c-52e5-b827-557766551111', '550e8400-e29b-41d4-a716-446655440000', 100.50) 
+VALUES (uuid_generate_v4(), 'CI Test User', 'test@example.com') 
 ON CONFLICT DO NOTHING;

@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_USER: user
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: FinTech_Analysis  # এখানে নাম ঠিক রাখা হয়েছে
+          POSTGRES_DB: FinTech_Analysis
         ports:
           - 5432:5432
         options: >-
@@ -38,6 +38,10 @@ jobs:
         run: |
           pip install dbt-postgres
           dbt deps
+
+      - name: Create Tables in GitHub
+        run: |
+          PGPASSWORD=password psql -h localhost -U user -d FinTech_Analysis -v ON_ERROR_STOP=1 -f init_db.sql
 
       - name: Verify dbt Connection
         run: dbt debug --profiles-dir .
