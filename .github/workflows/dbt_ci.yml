@@ -55,7 +55,7 @@ jobs:
           DBT_ENV_SECRET_USER: user
           DBT_ENV_SECRET_PASS: password
 
-      - name: Execute 27 Data Quality Tests
+      - name: Execute 28 Data Quality Tests
         run: dbt test --profiles-dir .
         env:
           DBT_ENV_SECRET_USER: user

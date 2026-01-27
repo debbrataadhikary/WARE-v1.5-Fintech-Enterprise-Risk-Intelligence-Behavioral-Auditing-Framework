@@ -71,9 +71,9 @@ SELECT
     alert_code,
     -- Mapping codes to human-readable labels for BI tools
     CASE 
-        WHEN alert_code = 'IMPOSSIBLE_TRAVEL' THEN '🚨 FLAG: Impossible Travel (Geo-Velocity Anomaly)'
-        WHEN alert_code = 'RAPID_IP_SWITCH'   THEN '⚠️ FLAG: Rapid IP Switching (Bot Suspicion)'
-        WHEN alert_code = 'OUTLIER_SPEND'     THEN '💰 FLAG: Outlier Spending (Dynamic Behavioral Deviation)'
+        WHEN alert_code = 'IMPOSSIBLE_TRAVEL' THEN '🚨 CRITICAL: Impossible Travel (Geo-Velocity Anomaly)'
+        WHEN alert_code = 'RAPID_IP_SWITCH'   THEN '⚠️ SUSPICIOUS: Rapid IP Switching (Bot Suspicion)'
+        WHEN alert_code = 'OUTLIER_SPEND'     THEN '💰 ANOMALY: Outlier Spending (Dynamic Behavioral Deviation)'
         ELSE '✅ Verified'
     END as alert_label,
     time_gap,
