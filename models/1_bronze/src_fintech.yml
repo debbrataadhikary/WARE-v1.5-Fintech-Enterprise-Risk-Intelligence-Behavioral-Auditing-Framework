@@ -1,10 +1,10 @@
 version: 2
 
 sources:
-  - name: raw_data
+  - name: raw_data  
     description: "Raw ingestion layer (Bronze) from fintech app"
     database: FinTech_Analysis
-    schema: raw_data
+    schema: public
     tables:
       - name: bronze_transactions
         description: "Raw transaction logs ingested via Python"

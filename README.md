@@ -12,7 +12,7 @@ Weighted Anomaly & Risk Engine (WARE) v1.5: Fintech Enterprise Risk Intelligence
 * **Contextual Priority:** T+1 windowing allows for deep 90-day behavioral baselines and seasonal adjustments.
 * **Engineering Restraint:** Explicitly scoped to post-transaction enforcement; it is a governance layer, not a payment gateway.
 
-![Project Lineage Graph](assets/dbt_project_lineage.png)
+![Project Lineage Graph](assets/dbt_project_lineage1.png)
 > *Figure 1: End-to-end Medallion Architecture Lineage (Bronze to Gold).*
 
 ## 2. Technical Assumptions & System Boundaries
@@ -50,6 +50,7 @@ Independent signals are generated to prevent single-point failures:
 
 * **User Anomaly (+7):** Behavioral deviation from personal 90-day baseline.
 * **GNRV (Global New Recipient Verification):** Network-level lookup for "zero-day" recipient detection.
+* **Forensic Alerting (Gold Layer):** Automated generation of high-fidelity forensic alerts for `IMPOSSIBLE_TRAVEL`, `RAPID_IP_SWITCH`, and `OUTLIER_SPEND` based on converged evidence.
 * **Adaptive Risk Scoring:** Includes IP-Location warmup and Trust Thresholding (€100 → €300) based on user age.
 * **Velocity Surge (+5):** Intent-based frequency trigger.
 > ![High Frequency Offenders](assets/High_Frequency_Offender_Profiles.png)
@@ -96,6 +97,7 @@ Claims are validated against a simulation of **34,077,579** transaction logs.
 * **Rule Co-occurrence:** 2.5$\sigma$ recalibration resulted in a **3.2x increase** in rule overlap, proving successful mitigation of rule isolation.
 * **Risk Containment:** Identified **€1.005 Billion** in simulated exposure, with 76% concentrated in the Score 15 category.
 * **Observability:** Automated alerts for Volume Deviations (>5%) and Freshness Lag (>60 mins).
+* **Automated Forensic Validation:** Successfully implemented and passed **27 rigorous data quality tests** (from Bronze to Gold) ensuring 0% compromise on schema integrity and forensic accuracy.
 > ![Executive Fraud Impact Report](assets/Executive_Fraud_Impact_report.png)
 > *Figure 8: Final executive report validating €1.005B risk containment.*
 
